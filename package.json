@@ -1,0 +1,31 @@
+{
+  "name": "chakribot",
+  "version": "1.0.0",
+  "description": "notify chakri related message",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saidur/fb-viber-whatsapp-bot.git"
+  },
+  "keywords": [
+    "facebook",
+    "viber",
+    "whatsapp",
+    "bot"
+  ],
+  "author": "saidur rahman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saidur/fb-viber-whatsapp-bot/issues"
+  },
+  "homepage": "https://github.com/saidur/fb-viber-whatsapp-bot#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
+  }
+}
