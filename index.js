@@ -41,12 +41,13 @@ app.get('/webhook', function (req, res) {
 
 // handler receiving messages
 app.post('/webhook', function (req, res) {  
-   res.send('test dew');
+   //res.send('test dew');
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-            sendMessage(event.sender.id, {text: "chakri.com: " + event.message.text});
+           // sendMessage(event.sender.id, {text: "chakri.com: " + event.message.text});
+           receivedMessage(event);
         }
     }
     res.sendStatus(200);
@@ -251,7 +252,7 @@ function receivedMessage(event) {
 function sendMessage(recipientId, message) {  
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN | PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
             recipient: {id: recipientId},
@@ -735,7 +736,7 @@ function sendJobNotification(phone_number,messages)
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: PAGE_ACCESS_TOKEN },
+    qs: { access_token: PAGE_ACCESS_TOKEN  },
     method: 'POST',
     json: messageData
 
