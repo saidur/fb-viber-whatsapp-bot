@@ -5,8 +5,9 @@ var app = express();
 
 var useragent = require('express-useragent');
 var path    = require("path");
-
-const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAELqZAzfZCi7bbUctFplk8uQXGPBeNeEReqoZBnlM45atX68e8iStouCQGzBLPZCHoZBJOdGMiwk9HoTvueu7dZB8Krrx36WKtYfmhhF8ZAsLNWmKv0BSZArPvtAvZB0cOiaw7c8mXw2Aasbd7o8ZBfF376xvTcxNl5AZDZD"
+// this is for chakribot
+//const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAELqZAzfZCi7bbUctFplk8uQXGPBeNeEReqoZBnlM45atX68e8iStouCQGzBLPZCHoZBJOdGMiwk9HoTvueu7dZB8Krrx36WKtYfmhhF8ZAsLNWmKv0BSZArPvtAvZB0cOiaw7c8mXw2Aasbd7o8ZBfF376xvTcxNl5AZDZD"
+const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAG3B5N6uoMGLcWxhMaAZA5FqFfs35WMFGVCYtMF1zFjwewakukHi5tmlAALLASbCh1FEfbeNIB3Mcm7fEL7klOpfCjVeIoYkeilVcA6BxDZAdfOVZB7pgA4PbZByBJumSP3ERjacdVhGNOWoGOE1trYUrcKiQQZDZD"
 const fb_verify_token = "webhooktoken"
 
 const port = process.env.PORT || 5000;
