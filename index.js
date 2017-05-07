@@ -7,7 +7,7 @@ var useragent = require('express-useragent');
 var path    = require("path");
 // this is for chakribot
 //const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAELqZAzfZCi7bbUctFplk8uQXGPBeNeEReqoZBnlM45atX68e8iStouCQGzBLPZCHoZBJOdGMiwk9HoTvueu7dZB8Krrx36WKtYfmhhF8ZAsLNWmKv0BSZArPvtAvZB0cOiaw7c8mXw2Aasbd7o8ZBfF376xvTcxNl5AZDZD"
-const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAG3B5N6uoMGLcWxhMaAZA5FqFfs35WMFGVCYtMF1zFjwewakukHi5tmlAALLASbCh1FEfbeNIB3Mcm7fEL7klOpfCjVeIoYkeilVcA6BxDZAdfOVZB7pgA4PbZByBJumSP3ERjacdVhGNOWoGOE1trYUrcKiQQZDZD"
+const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAD1ZB7Hs08wo2f8kpanSdyfVkERDN7GZAhVfEZBuQi9ZC7ntwjz8ZCV05UrdnF9RiOPCH5ZADvkL7TZBNTs5oh6EtkSWikvbjI6j1aXEOSKIb4Kgc4iXggMP2PSXecAumGIoZAPHrUU7MV5oaevZBltto8TXZBneeKuAZDZD"
 const fb_verify_token = "webhooktoken"
 
 const port = process.env.PORT || 5000;
@@ -41,6 +41,7 @@ app.get('/webhook', function (req, res) {
 
 // handler receiving messages
 app.post('/webhook', function (req, res) {  
+   res.send(req.body.entry[0].messaging);
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
