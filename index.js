@@ -149,7 +149,7 @@ app.post('/webhook', function (req, res) {
 });
 
 
-app.get('/jobs/:phone', function (req, res) {  
+app.get('/jobs', function (req, res) {  
     
     /*if (req.query['hub.verify_token'] === fb_verify_token) {
         res.send(req.query['hub.challenge']);
@@ -738,8 +738,10 @@ function sendJobNotification(phone_number)
    var messageData = {
     recipient: {
      // id: recipientId
-     "phone_number": "8801673615816"
+     //"phone_number": "8801673615816"
      //"phone_number": "8801731867337"
+     //"phone_number" " 88"+phone_number
+     "phone_number" : "8801748152992"
     },
     message: {
       attachment: {
