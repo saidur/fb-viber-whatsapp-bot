@@ -149,15 +149,15 @@ app.post('/webhook', function (req, res) {
 });
 
 
-app.get('/jobs', function (req, res) {  
+app.get('/jobs/:phone', function (req, res) {  
     
     /*if (req.query['hub.verify_token'] === fb_verify_token) {
         res.send(req.query['hub.challenge']);
     } else {
         res.send('Invalid verify token');
     }*/
-    var phone = req.query['phone'];
-    console.log ('phone' + phone);
+    var phone = req.query.phone;
+    console.log ('phone: ' + phone);
     sendJobNotification(phone);
 
     res.sendStatus(200); 
