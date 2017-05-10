@@ -742,7 +742,7 @@ function sendJobNotification(phone_number)
      // id: recipientId
      //"phone_number": "8801673615816"
      //"phone_number": "8801731867337"
-     "phone_number" phone_number
+     "phone_number" : phone_number
      //"phone_number" : "8801748152992"
     },
     message: {
