@@ -623,12 +623,22 @@ function sendFileMessage(recipientId) {
  *
  */
 function sendTextMessage(recipientId, messageText) {
+  
+  var msg; 
+  if (messageText=="hi")
+  {
+     msg=  "chakri.com: " + "Welcome to chakri.com. Are you looking for jobs ? If so then type 'job yes' ";
+  }else
+  {
+    msg = "chakri.com: " +messageText;
+  }
+
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: " chakri.com: " + messageText,
+      text: msg,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
