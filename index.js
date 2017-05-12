@@ -4,6 +4,7 @@ var request = require('request');
 var app = express();
 var useragent = require('express-useragent');
 var path    = require("path");
+var stringSearcher = require('string-search');
 // this is for chakribot
 //const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAELqZAzfZCi7bbUctFplk8uQXGPBeNeEReqoZBnlM45atX68e8iStouCQGzBLPZCHoZBJOdGMiwk9HoTvueu7dZB8Krrx36WKtYfmhhF8ZAsLNWmKv0BSZArPvtAvZB0cOiaw7c8mXw2Aasbd7o8ZBfF376xvTcxNl5AZDZD"
 const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAD1ZB7Hs08wo2f8kpanSdyfVkERDN7GZAhVfEZBuQi9ZC7ntwjz8ZCV05UrdnF9RiOPCH5ZADvkL7TZBNTs5oh6EtkSWikvbjI6j1aXEOSKIb4Kgc4iXggMP2PSXecAumGIoZAPHrUU7MV5oaevZBltto8TXZBneeKuAZDZD"
@@ -95,9 +96,11 @@ http.get(url, function(res){
           
           myelement.title = category;
           myelement.subtitle = job_title.substr(0, 80).trim();
-          myelement.buttons[1].url =  item_url;
+          //myelement.buttons[1].url =  item_url;
+          myelement.buttons[1].url = item_url.replace(/^"(.*)"$/, '$1');
+          //console.log ("link : "+item_url);
           myTemplate.message.attachment.payload.elements.push(myelement);
-          console.log(id,job_title,category,item_url);
+          //console.log(id,job_title,category,item_url);
       }  
 
       options.body = myTemplate;
@@ -226,16 +229,7 @@ res.sendStatus(200);
 });
 
 
-callback = function(response) {
-    var str = ''
-    response.on('data', function (chunk) {
-      str += chunk;
-    });
 
-    response.on('end', function () {
-      console.log(str);
-    });
-}
 
 
 
@@ -267,8 +261,13 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-           // sendMessage(event.sender.id, {text: "chakri.com: " + event.message.text});
-           receivedMessage(event);
+           
+
+
+                // sendMessage(event.sender.id, {text: "chakri.com: " + event.message.text});
+               receivedMessage(event);
+             
+            
         }
     }
     res.sendStatus(200);
@@ -478,7 +477,15 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        if (messageText=="hi")
+        {
+          messageText = "Welcome to Chakri.com. Are you looking for jobs ? if so then type : jobs ."
+          sendTextMessage(senderID, messageText);  
+        }else
+        {
+          sendTextMessage(senderID, messageText);
+        }
+        
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
