@@ -663,7 +663,7 @@ function sendTextMessage(recipientId, messageText) {
   }else if (messageText=="job yes"){
     msg=  "chakri.com: " + "please type your search category . like 'cat=it' ";
 
-  }else if (messageText.search("cat")){
+  }else if (messageText=='cat'){
     wikibot("it",recipientId);
   }
   else
