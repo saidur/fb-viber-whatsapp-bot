@@ -27,12 +27,44 @@ var http = require('http');
 
 app.get('/jobalert',function(req,res){
 
-    wikibot('it','8801673615816');
+    var phone = req.query.phone;
+    console.log ('phone: ' + phone);
+    wikibot('it',phone);
 
     res.sendStatus(200);
 
 
 });
+
+app.get('/cvalert',function(req,res){
+
+    var phone = req.query.phone;
+    console.log ('phone: ' + phone);
+    cvalertbot('it',phone);
+
+    res.sendStatus(200);
+
+
+});
+
+function cvalertbot(msg,userid)
+{
+  msg = "chakri.com: Companies Cannot shortlist your CV. Because your cv is not complete. Please fillup your cv.  ";
+
+  var messageData = {
+    
+    recipient: {
+      phone_number: userid
+    },
+    message: {
+      text: msg,
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
 
 function wikibot(query, userid) {
   var queryUrl = "http://www.chakri.com/chkapi/rest/usernotification?key=16486";
@@ -41,7 +73,7 @@ function wikibot(query, userid) {
   var myTemplate = {
     recipient: {
       //id: userid
-      phone_number:"8801673615816"
+      phone_number: userid
     },
     message: {
       attachment: {
