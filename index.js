@@ -477,14 +477,8 @@ function receivedMessage(event) {
         break;
 
       default:
-        if (messageText=="hi")
-        {
-          messageText = "Welcome to Chakri.com. Are you looking for jobs ? if so then type : jobs ."
+
           sendTextMessage(senderID, messageText);  
-        }else
-        {
-          sendTextMessage(senderID, messageText);
-        }
         
     }
   } else if (messageAttachments) {
