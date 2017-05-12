@@ -205,6 +205,146 @@ http.get(url, function(res){
 };
 
 
+
+function chakribot(query, userid) {
+  var queryUrl = "http://www.chakri.com/chkapi/rest/usernotification?key=16486";
+  var url = queryUrl;
+  
+  var myTemplate = {
+    recipient: {
+      id: userid
+      //phone_number: userid
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: []
+        }
+      }
+    }
+  };
+  var options = {
+    //url: url,
+    url: queryUrl,
+    method: 'POST',
+    body: myTemplate,
+    json: true
+  }
+
+http.get(url, function(res){
+    var body = '';
+
+    res.on('data', function(chunk){
+        body += chunk;
+    });
+
+    res.on('end', function(){
+        var jobResponse = JSON.parse(body);
+
+        //res.writeHead(200, {'Content-Type': 'text/plain'});
+        for (var i=0; i<jobResponse.data.length; i++){
+            var id = JSON.stringify(jobResponse.data[i].id);
+            var job_title = JSON.stringify(jobResponse.data[i].job_title);
+            var category = JSON.stringify(jobResponse.data[i].category);
+            var item_url = JSON.stringify(jobResponse.data[i].item_url);
+
+            console.log("Got a response: ", item_url);
+
+            var myelement = {
+                  title: "",
+                  subtitle: "",
+                  buttons: [{
+                    type: "postback",
+                    title: "Read more",
+                    payload: "Nothing here, Please view in browser"
+                  }, {
+                    type: "web_url",
+                    url: "",
+                    title: "View in browser"
+                  }]
+          };
+          
+          myelement.title = category;
+          myelement.subtitle = job_title.substr(0, 80).trim();
+          //myelement.buttons[1].url =  item_url;
+          myelement.buttons[1].url = item_url.replace(/^"(.*)"$/, '$1');
+          //console.log ("link : "+item_url);
+          myTemplate.message.attachment.payload.elements.push(myelement);
+          //console.log(id,job_title,category,item_url);
+      }  
+
+      options.body = myTemplate;
+
+      callSendAPI(myTemplate);
+
+        //console.log("Got a response: ", jobResponse.data);
+    });
+}).on('error', function(e){
+      console.log("Got an error: ", e);
+});
+
+
+  /*request(queryUrl, function(error, response, body) {
+    console.log ('test..........');
+
+    if (error) {
+      console.log(error);
+    }
+    try {
+      body = JSON.parse(body);
+      var pages = body.query.data;
+      console.log (pages);
+      for (var i = 0 in pages) {
+        var myelement = {
+          title: "",
+          subtitle: "",
+          buttons: [{
+            type: "postback",
+            title: "Read more",
+            payload: "Nothing here, Please view in browser"
+          }, {
+            type: "web_url",
+            url: "",
+            title: "View in browser"
+          }]
+        };
+        myelement.title = pages[i].category;
+        myelement.subtitle = pages[i].job_title.substr(0, 80).trim();
+        myelement.buttons[1].url =  pages[i].item_url;
+        if (pages[i].extract != "") {
+        myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
+        }
+        myTemplate.message.attachment.payload.elements.push(myelement);
+      }
+      options.body = myTemplate;
+    }
+    catch (err) {
+      console.log("error : " + err.message);
+      options = {
+        uri: url,
+        method: 'POST',
+        json: {
+          "recipient": {
+            "id": userid
+          },
+          "message": {
+            "text": "Something went wrong, please try again."
+          }
+        }
+      }
+    }
+    request(options, function(error, response, body) {
+      if (error) {
+        console.log(error.message);
+      }
+      console.log(body);
+    });
+  })*/
+};
+
+
 app.get('/jobnotify', function (req, res) {  
    // res.send('This is TestBot Server');
 
@@ -664,7 +804,7 @@ function sendTextMessage(recipientId, messageText) {
     msg=  "chakri.com: " + "please type your search category . like 'cat=it' ";
 
   }else if (messageText=='cat'){
-    wikibot("it",recipientId);
+    chakribot("it",recipientId);
   }
   else
   {
