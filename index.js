@@ -628,7 +628,11 @@ function sendTextMessage(recipientId, messageText) {
   if (messageText=="hi")
   {
      msg=  "chakri.com: " + "Welcome to chakri.com. Are you looking for jobs ? If so then type 'job yes' ";
-  }else
+  }else if (messageText=="job yes"){
+    msg=  "chakri.com: " + "please type your search category . like 'cat=it' ";
+
+  }
+  else
   {
     msg = "chakri.com: " +messageText;
   }
