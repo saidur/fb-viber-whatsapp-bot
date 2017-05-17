@@ -796,19 +796,25 @@ function sendFileMessage(recipientId) {
  */
 function sendTextMessage(recipientId, messageText) {
   
-  var msg; 
-  if (messageText=="hi")
-  {
-     msg=  "chakri.com: " + "Welcome to chakri.com. Are you looking for jobs ? If so then type 'job yes' ";
-  }else if (messageText=="job yes"){
-    msg=  "chakri.com: " + "please type your search category . like 'cat=it' ";
+  var msg;
 
-  }else if (messageText=='cat'){
+
+  if (messageText.toLowerCase()=="hi" || messageText.toLowerCase()=="hello")
+  {
+     msg=  "chakri.com: " + "Welcome to chakri.com. Are you looking for jobs ? If so then type 'job' ";
+  }else if (messageText=="job yes"){
+    msg=  "chakri.com: " + "please type your search category . like 'cat:it' ";
+
+  }else if (messageText.match(/cat/)){
+    var res = messageText.split(":");
+    console.log (res);
     chakribot("it",recipientId);
   }
   else
   {
-    msg = "chakri.com: " +messageText;
+    //msg = "chakri.com: " +messageText;
+
+    msg = "welcome to chakri.com site.I am bot. If you are looking for job then type 'job' or if your are looking for cv then type 'cv' " ;
   }
 
   var messageData = {
@@ -1188,6 +1194,32 @@ function callSendAPI(messageData) {
     }
   });  
 }
+
+//**************Whatsapp********************************//
+
+app.get('/whatsapp/:phonenum/:message', (req, res) => {
+    
+    var source = req.header('user-agent');
+    var ua = useragent.parse(source);
+    
+
+    //var phonenum = '0123456789';
+    var phonenum = req.params.phonenum;  
+    var message  = req.params.message;
+    console.log ("Phone number "+phonenum);
+    console.log ('message' + message);
+
+    
+
+    if (ua.isDesktop) {
+        //res.status(308).redirect(`https://web.whatsapp.com/send?phone=+${phonenum}`);
+        res.status(308).redirect(`https://web.whatsapp.com/send?phone=+${req.params.phonenum}&text=${req.params.message}`);
+    } else if (ua.isMobile) {
+        res.status(308).redirect(`whatsapp://send?phone=+${phonenum}`);
+    } else {
+        res.status(400).json({status: "error"});
+    }
+})
 
 
 // Start server at <port>
