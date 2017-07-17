@@ -12,7 +12,7 @@ var stringSearcher = require('string-search');
 add viber 
 */
 
-const ViberBot = require('viber-bot').Bot;
+/*const ViberBot = require('viber-bot').Bot;
 const BotEvents = require('viber-bot').Events;
 const TextMessage = require('viber-bot').Message.Text;
 
@@ -99,7 +99,7 @@ bot.onTextMessage(/./, (message, response) => {
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
 
-
+*/
 
 
 
