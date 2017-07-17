@@ -1209,7 +1209,7 @@ app.get('/whatsapp/:phonenum/:message', (req, res) => {
     }
 })
 
-/*if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
+if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     const http = require('http');
     const port = process.env.PORT || port;
 
@@ -1217,7 +1217,7 @@ app.get('/whatsapp/:phonenum/:message', (req, res) => {
      logger.debug('Available at http://localhost:${port}');
   } else {
     logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
-}*/
+}
 
 
 // Start server at <port>
