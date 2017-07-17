@@ -77,7 +77,7 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot(logger, {
     authToken: VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY, // Learn how to get your access token at developers.viber.com
-    name: "Is It Up",
+    name: "viber chakri bot",
     avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
 });
 
@@ -99,14 +99,7 @@ bot.onTextMessage(/./, (message, response) => {
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
 
-if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
-    const http = require('http');
-    const port = process.env.PORT || 8080;
 
-    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
-} else {
-    logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
-}
 
 
 
@@ -251,62 +244,7 @@ http.get(url, function(res){
 });
 
 
-  /*request(queryUrl, function(error, response, body) {
-    console.log ('test..........');
-
-    if (error) {
-      console.log(error);
-    }
-    try {
-      body = JSON.parse(body);
-      var pages = body.query.data;
-      console.log (pages);
-      for (var i = 0 in pages) {
-        var myelement = {
-          title: "",
-          subtitle: "",
-          buttons: [{
-            type: "postback",
-            title: "Read more",
-            payload: "Nothing here, Please view in browser"
-          }, {
-            type: "web_url",
-            url: "",
-            title: "View in browser"
-          }]
-        };
-        myelement.title = pages[i].category;
-        myelement.subtitle = pages[i].job_title.substr(0, 80).trim();
-        myelement.buttons[1].url =  pages[i].item_url;
-        if (pages[i].extract != "") {
-        myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
-        }
-        myTemplate.message.attachment.payload.elements.push(myelement);
-      }
-      options.body = myTemplate;
-    }
-    catch (err) {
-      console.log("error : " + err.message);
-      options = {
-        uri: url,
-        method: 'POST',
-        json: {
-          "recipient": {
-            "id": userid
-          },
-          "message": {
-            "text": "Something went wrong, please try again."
-          }
-        }
-      }
-    }
-    request(options, function(error, response, body) {
-      if (error) {
-        console.log(error.message);
-      }
-      console.log(body);
-    });
-  })*/
+ 
 };
 
 
@@ -391,62 +329,7 @@ http.get(url, function(res){
 });
 
 
-  /*request(queryUrl, function(error, response, body) {
-    console.log ('test..........');
-
-    if (error) {
-      console.log(error);
-    }
-    try {
-      body = JSON.parse(body);
-      var pages = body.query.data;
-      console.log (pages);
-      for (var i = 0 in pages) {
-        var myelement = {
-          title: "",
-          subtitle: "",
-          buttons: [{
-            type: "postback",
-            title: "Read more",
-            payload: "Nothing here, Please view in browser"
-          }, {
-            type: "web_url",
-            url: "",
-            title: "View in browser"
-          }]
-        };
-        myelement.title = pages[i].category;
-        myelement.subtitle = pages[i].job_title.substr(0, 80).trim();
-        myelement.buttons[1].url =  pages[i].item_url;
-        if (pages[i].extract != "") {
-        myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
-        }
-        myTemplate.message.attachment.payload.elements.push(myelement);
-      }
-      options.body = myTemplate;
-    }
-    catch (err) {
-      console.log("error : " + err.message);
-      options = {
-        uri: url,
-        method: 'POST',
-        json: {
-          "recipient": {
-            "id": userid
-          },
-          "message": {
-            "text": "Something went wrong, please try again."
-          }
-        }
-      }
-    }
-    request(options, function(error, response, body) {
-      if (error) {
-        console.log(error.message);
-      }
-      console.log(body);
-    });
-  })*/
+  
 };
 
 
@@ -1325,6 +1208,16 @@ app.get('/whatsapp/:phonenum/:message', (req, res) => {
         res.status(400).json({status: "error"});
     }
 })
+
+if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
+    const http = require('http');
+    const port = process.env.PORT || port;
+
+    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+     logger.debug('Available at http://localhost:${port}');
+  } else {
+    logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
+}
 
 
 // Start server at <port>
