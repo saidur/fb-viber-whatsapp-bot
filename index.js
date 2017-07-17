@@ -1221,9 +1221,9 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
 
 
 // Start server at <port>
-app.listen(port, (err) => {
+/*app.listen(port, (err) => {
     console.log(`Available at http://localhost:${port}`);
     if (err) {
         console.log(err);
     }
-})
+})*/
