@@ -1211,7 +1211,7 @@ app.get('/whatsapp/:phonenum/:message', (req, res) => {
 
 if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     const http = require('http');
-    const port = process.env.PORT || port;
+    //const port = process.env.PORT || port;
 
     http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
      logger.debug('Available at http://localhost:${port}');
