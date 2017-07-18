@@ -82,7 +82,7 @@ bot.onTextMessage(/./, (message, response) => {
     checkUrlAvailability(response, message.text);
 });
 
-bot.onTextMessage(/^hi|hello$/i, (message, response) =>
+bot.onTextMessage(/^hi|Hi|hello$/i, (message, response) =>
     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`)));
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
