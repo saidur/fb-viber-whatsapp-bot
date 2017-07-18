@@ -8,8 +8,7 @@ var useragent = require('express-useragent');
 var path    = require("path");
 var stringSearcher = require('string-search');
 /* 
-
-add viber 
+start  viber 
 */
 
 const ViberBot = require('viber-bot').Bot;
@@ -99,13 +98,21 @@ bot.onTextMessage(/./, (message, response) => {
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
 
+if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
+    const http = require('http');
+    //const port = process.env.PORT || port;
 
+    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+     logger.debug('Available at http://localhost:${port}');
+  } else {
+    logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
+}
 
 
 
 // this is for chakribot
 //const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAELqZAzfZCi7bbUctFplk8uQXGPBeNeEReqoZBnlM45atX68e8iStouCQGzBLPZCHoZBJOdGMiwk9HoTvueu7dZB8Krrx36WKtYfmhhF8ZAsLNWmKv0BSZArPvtAvZB0cOiaw7c8mXw2Aasbd7o8ZBfF376xvTcxNl5AZDZD"
-const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAD1ZB7Hs08wo2f8kpanSdyfVkERDN7GZAhVfEZBuQi9ZC7ntwjz8ZCV05UrdnF9RiOPCH5ZADvkL7TZBNTs5oh6EtkSWikvbjI6j1aXEOSKIb4Kgc4iXggMP2PSXecAumGIoZAPHrUU7MV5oaevZBltto8TXZBneeKuAZDZD"
+/*const PAGE_ACCESS_TOKEN = "EAAEnw2c9cIsBAD1ZB7Hs08wo2f8kpanSdyfVkERDN7GZAhVfEZBuQi9ZC7ntwjz8ZCV05UrdnF9RiOPCH5ZADvkL7TZBNTs5oh6EtkSWikvbjI6j1aXEOSKIb4Kgc4iXggMP2PSXecAumGIoZAPHrUU7MV5oaevZBltto8TXZBneeKuAZDZD"
 const fb_verify_token = "webhooktoken"
 const port = process.env.PORT || 5000;
 
@@ -337,21 +344,7 @@ app.get('/jobnotify', function (req, res) {
    // res.send('This is TestBot Server');
 
    //The url we want is `www.nodejitsu.com:1337/`
-/*var options = {
-  host: 'http://www.chakri.com/chkapi/rest/usernotification?key=16486',
-  path: '/',
-  //since we are listening on a custom port, we need to specify it by hand
-  //port: '1337',
-  //This is what changes the request to a POST request
-  method: 'get'
-};
-  
 
-   //res.sendFile(path.join(__dirname+'/index.html'));
-   var req = http.request(options, callback);
-  //This is the data we are posting, it needs to be a string or a buffer
-  //req.write("hello world!");
-   req.end();*/
    var url = 'http://www.chakri.com/chkapi/rest/usernotification?key=16486';
 
 http.get(url, function(res){
@@ -432,7 +425,7 @@ app.post('/webhook', function (req, res) {
     }
     res.sendStatus(200);
 });
-
+*/
 
 /*
  * All callbacks for Messenger are POST-ed. They will be sent to the same
@@ -1209,15 +1202,7 @@ app.get('/whatsapp/:phonenum/:message', (req, res) => {
     }
 })
 
-if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
-    const http = require('http');
-    //const port = process.env.PORT || port;
 
-    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
-     logger.debug('Available at http://localhost:${port}');
-  } else {
-    logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
-}
 
 
 // Start server at <port>
