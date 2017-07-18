@@ -92,6 +92,10 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     }
 });
 
+// A simple regular expression to answer messages in the form of 'hi' and 'hello'.
+bot.onTextMessage(/^hi|hello$/i, (message, response) =>
+    response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`)));
+
 bot.onTextMessage(/./, (message, response) => {
     checkUrlAvailability(response, message.text);
 });
